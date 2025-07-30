@@ -32,6 +32,7 @@ A simple social media web application built with **Node.js**, **Express.js**, **
 
 ## 📂 Folder Structure
 
+<img width="196" height="667" alt="folderStructure" src="https://github.com/user-attachments/assets/e0aad7d8-198b-4da3-bda3-84cd23eb92b1" />
 
 
 
