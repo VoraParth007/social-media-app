@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-zinc-900 text-white min-h-screen">
+    <div class="max-w-5xl mx-auto px-6 py-10">
+      <!-- Logout Button -->
+      <div class="flex justify-end mb-6">
+        <a
+          href="/logout"
+          class="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded-md transition"
+        >
+          Logout
+        </a>
+      </div>
+
+      <!-- User Greeting -->
+<div class="bg-white shadow-md rounded-xl p-6 mb-10">
+  <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-6">
+    
+    <!-- Left: Profile Image + Info -->
+    <div class="flex items-center gap-5">
+      <img
+        src="/images/uploads/<%= user.profileImage %>"
+        alt="Profile Pic"
+        class="w-24 h-24 rounded-full object-cover border-4 border-blue-600 shadow-sm"
+      />
+      <div>
+        <h1 class="text-3xl font-semibold text-zinc-800 leading-snug">
+          <span class="block text-zinc-400 text-base font-normal">Hello,</span>
+          <%= user.name %> ✌
+        </h1>
+        <p class="text-sm text-zinc-500 mt-1">@<%= user.username %> • Age <%= user.age %></p>
+      </div>
+    </div>
+
+    <!-- Right: Change Picture Button -->
+    <div class="sm:mt-0 mt-4">
+      <a
+        href="/profile/upload"
+        class="inline-block bg-zinc-500 hover:bg-zinc-200 text-zinc-100 px-4 py-2 rounded-md text-sm font-medium transition"
+      >
+        Change Profile Picture
+      </a>
+    </div>
+  </div>
+</div>
+
+      <!-- Create Post Form -->
+      <div class="mb-12">
+        <h5 class="text-lg font-medium mb-2 text-zinc-400">Create a Post</h5>
+        <form method="POST" action="/post" class="space-y-4">
+          <textarea
+            name="content"
+            placeholder="Write your post here..."
+            class="w-full md:w-2/3 p-4 h-36 bg-zinc-800 border border-zinc-700 rounded-md resize-none focus:border-blue-500 focus:ring focus:ring-blue-500 outline-none"
+          ></textarea>
+          <button
+            type="submit"
+            class="block bg-blue-600 hover:bg-blue-700 px-5 py-2 text-sm rounded-md transition"
+          >
+            Post
+          </button>
+        </form>
+      </div>
+
+      <!-- User Posts -->
+      <div class="posts">
+        <h3 class="text-zinc-400 text-lg mb-4">Your Posts</h3>
+        <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <% user.posts.reverse().forEach(function(post) { %>
+          <div class="bg-zinc-800 p-5 rounded-lg shadow-sm">
+            <h4 class="text-blue-500 mb-2">@<%= user.username %></h4>
+            <p class="text-sm text-zinc-300 mb-2"><%= post.content %></p>
+            <small class="block text-zinc-500 mb-3">
+              <%= post.likes.length %> Likes
+            </small>
+            <div class="flex gap-4 text-sm">
+              <a
+                href="/like/<%= post._id %>"
+                class="hover:underline text-blue-500"
+              >
+                ❤️ Like (<%= post.likes.length %>)
+              </a>
+              <a
+                href="/edit/<%= post._id %>"
+                class="text-zinc-400 hover:underline"
+              >
+                Edit
+              </a>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
